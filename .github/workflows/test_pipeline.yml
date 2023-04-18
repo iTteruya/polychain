@@ -31,4 +31,4 @@ jobs:
           python -m pip install -r requirements.txt
       - name: Test with pytest
         run: |
-          python -m pytest polychain/tests/block_test.py polychain/tests/node_test.py polychain/tests/server_test.py
+          python -m pytest tests/block_test.py tests/node_test.py tests/server_test.py
