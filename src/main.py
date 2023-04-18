@@ -1,5 +1,5 @@
 from flask import Flask, request
-import node
+from src import node
 import threading
 import logging
 import requests
