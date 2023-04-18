@@ -1,11 +1,11 @@
 from flask import Flask, request
-import node
 import threading
 import logging
 import requests
 import time
 import sys
 from gevent import monkey
+from src import node
 
 monkey.patch_all()
 logging.getLogger('werkzeug').disabled = True
