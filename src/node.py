@@ -1,6 +1,6 @@
 import json
-import block
 import time
+from src import block
 from datetime import datetime
 
 
