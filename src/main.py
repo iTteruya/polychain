@@ -55,9 +55,14 @@ class Server:
                 self.received_block = False
                 return "Failed to receive the block"
 
-        app_thread = threading.Thread(
-            target=app.run, kwargs={"host": "0.0.0.0", "port": self.port}, daemon=True
-        )
+        if self.local:
+            app_thread = threading.Thread(
+                target=app.run, kwargs={"host": "localhost", "port": self.port}, daemon=True
+            )
+        else:
+            app_thread = threading.Thread(
+                target=app.run, kwargs={"host": "0.0.0.0", "port": self.port}, daemon=True
+            )
         app_thread.start()
 
     def block_generator(self):

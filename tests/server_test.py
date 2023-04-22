@@ -28,6 +28,10 @@ def test_server_init(three_servers):
 def test_start_and_generator(three_servers):
     server1, server2, server3 = three_servers
 
+    server1.local = True
+    server2.local = True
+    server3.local = True
+
     server3.start_flask()
     server2.start_flask()
     server1.start_flask()
@@ -35,8 +39,6 @@ def test_start_and_generator(three_servers):
     assert server3.stop_event is False
     assert server2.stop_event is False
     assert server1.stop_event is False
-
-    server1.local = True
 
     length = random.randint(1, 5)
     server1.start_limited_generator(length)
