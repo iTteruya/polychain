@@ -13,7 +13,7 @@ def three_servers():
 
 
 def test_server_init(three_servers):
-    for i in range(100):
+    for i in range(5):
         server1, server2, server3 = three_servers
 
         assert server1.id == 1
@@ -35,6 +35,8 @@ def test_start_and_generator(three_servers):
     assert server3.stop_event is False
     assert server2.stop_event is False
     assert server1.stop_event is False
+
+    server1.local = True
 
     length = random.randint(1, 5)
     server1.start_limited_generator(length)

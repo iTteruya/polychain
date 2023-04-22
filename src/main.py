@@ -18,13 +18,21 @@ class Server:
         3003: [3001, 3002],
     }
 
+    PEER_CONTAINERS = {
+        3001: ["Node2", "Node3"],
+        3002: ["Node1", "Node3"],
+        3003: ["Node1", "Node2"]
+    }
+
     def __init__(self, port: int):
         self.id = port % 10  # Node ID
         self.port = port
         self.peer_ports = self.PEER_PORTS[self.port]
+        self.peer_cont = self.PEER_CONTAINERS[self.port]
         self.received_block = False
         self.stop_event = False
         self.node = node.Node(self)
+        self.local = False
 
     def start(self):
         self.start_flask()
@@ -48,7 +56,7 @@ class Server:
                 return "Failed to receive the block"
 
         app_thread = threading.Thread(
-            target=app.run, kwargs={"host": "localhost", "port": self.port}, daemon=True
+            target=app.run, kwargs={"host": "0.0.0.0", "port": self.port}, daemon=True
         )
         app_thread.start()
 
@@ -69,7 +77,10 @@ class Server:
             self.block_generator()
 
     def broadcast_block(self, block):
-        urls = [f"http://localhost:{p}/" for p in self.peer_ports]
+        if self.local:
+            urls = [f"http://localhost:{p}/" for p in self.peer_ports]
+        else:
+            urls = [f"http://{container_name}:{p}/" for container_name, p in zip(self.peer_cont, self.peer_ports)]
         if not self.received_block:
             for url in urls:
                 requests.post(url, json=block.to_json(self.id))
