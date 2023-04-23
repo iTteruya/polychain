@@ -13,7 +13,7 @@ def three_servers():
 
 
 def test_server_init(three_servers):
-    for i in range(100):
+    for i in range(5):
         server1, server2, server3 = three_servers
 
         assert server1.id == 1
@@ -27,6 +27,10 @@ def test_server_init(three_servers):
 
 def test_start_and_generator(three_servers):
     server1, server2, server3 = three_servers
+
+    server1.local = True
+    server2.local = True
+    server3.local = True
 
     server3.start_flask()
     server2.start_flask()

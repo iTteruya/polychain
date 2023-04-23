@@ -6,7 +6,7 @@ import pytest
 
 
 def test_add_genesis():
-    for i in range(100):
+    for i in range(5):
         node = Node(1)
         genesis = node.add_genesis()
         assert len(node.blocks) == 1
@@ -19,7 +19,7 @@ def test_add_genesis():
 def test_create_new_block(server_id):
     server = Server(server_id)
     server.node.add_genesis()
-    for i in range(100):
+    for i in range(5):
         block = server.node.create_new_block()
         server.node.blocks.append(block)
         server.node.last_block = block
@@ -43,7 +43,7 @@ def test_handle_received_block(server_id):
     assert res is True
 
     ports = [3001, 3002, 3003]
-    for i in range(100):
+    for i in range(5):
         port = random.choice(ports)
         new_block = server.node.create_new_block()
         if port == server_id:

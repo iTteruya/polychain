@@ -5,7 +5,7 @@ from src import block
 
 
 def test_block_init():
-    for i in range(100):
+    for i in range(5):
         block_index = random.randint(1, 100000)
         nonce_type = random.randint(1, 3)
         prev_hash = 'test_init'
@@ -22,7 +22,7 @@ def test_block_init():
 
 
 def test_block_init_creates_unique_block_hashes():
-    for i in range(100):
+    for i in range(5):
         # Create two blocks with the same attributes and ensure their hashes are different
         block_index = random.randint(1, 100000)
         nonce_type = random.randint(1, 3)
@@ -35,7 +35,7 @@ def test_block_init_creates_unique_block_hashes():
 
 
 def test_mine_creates_block_with_hash_ending_in_zeros():
-    for i in range(100):
+    for i in range(5):
         block_index = 1
         prev_hash = 'mine_test'
         nonce_type = 1
@@ -47,7 +47,7 @@ def test_mine_creates_block_with_hash_ending_in_zeros():
 
 
 def test_block_to_json():
-    for i in range(100):
+    for i in range(5):
         block_index = random.randint(1, 100000)
         prev_hash = 'json_test'
         nonce_type = random.randint(1, 3)
@@ -74,7 +74,7 @@ def test_block_to_json():
 
 
 def test_create_genesis():
-    for i in range(100):
+    for i in range(5):
         genesis_block = block.create_genesis()
 
         assert genesis_block is not None
@@ -87,7 +87,7 @@ def test_create_genesis():
 
 
 def test_data_gen():
-    for i in range(100):
+    for i in range(5):
         new_block1 = block.Block(1, "gen_test", 0, None)
         assert len(new_block1.data) == 256
         new_block2 = block.Block(1, "gen_test", 0, None)

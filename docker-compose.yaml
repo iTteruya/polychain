@@ -4,25 +4,20 @@ services:
   Node3:
     image: tr/polychain
     container_name: Node3
-    network_mode: host
     command: "3003"
     stdin_open: true
     tty: true
 
-
   Node2:
     image: tr/polychain
     container_name: Node2
-    network_mode: host
     command: "3002"
     stdin_open: true
     tty: true
 
-
   Node1:
     image: tr/polychain
     container_name: Node1
-    network_mode: host
     command: "3001"
     stdin_open: true
     tty: true
